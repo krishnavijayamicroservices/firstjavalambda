@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'firstjavalambda
+
+  Sample SAM Template for firstjavalambda
+
+  '
+Globals:
+  Function:
+    Timeout: 20
+Resources:
+  MyFirstLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: MyFirstLambdaFunction
+      Handler: com.awsdev.App::handleRequest
+      Runtime: java8
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+          JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: post
+    Metadata:
+      SamResourceId: MyFirstLambdaFunction
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  MyFirstLambdaFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - MyFirstLambdaFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - MyFirstLambdaFunctionRole
+      - Arn
