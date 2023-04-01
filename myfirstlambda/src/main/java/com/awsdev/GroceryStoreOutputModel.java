@@ -6,6 +6,8 @@ import java.util.List;
 
 public class GroceryStoreOutputModel implements Serializable {
     
+    private String version;
+    
     private List<Choice> choices = new ArrayList<>();
 
     public List<Choice> getChoices() {
@@ -16,5 +18,12 @@ public class GroceryStoreOutputModel implements Serializable {
         this.choices = choices;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
 }
